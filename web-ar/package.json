@@ -1,6 +1,7 @@
 {
   "name": "web-ar",
   "version": "0.1.4",
+  "description": "version bump tester",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
