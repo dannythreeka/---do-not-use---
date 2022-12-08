@@ -15,7 +15,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "bump-patch": "NEW_VERSION=$(npm version patch) && git add package.json package-lock.json && git commit -m $NEW_VERSION"
+    "bump-patch": "NEW_VERSION=$(npm version patch) && git add package.json package-lock.json && git commit -m $NEW_VERSION",
+    "bump-minor": "NEW_VERSION=$(npm version minor) && git add package.json package-lock.json && git commit -m $NEW_VERSION"
   },
   "eslintConfig": {
     "extends": "react-app"
