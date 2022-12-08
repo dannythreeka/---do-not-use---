@@ -1,6 +1,6 @@
 {
   "name": "web-ar",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "version bump tester",
   "private": true,
   "dependencies": {
