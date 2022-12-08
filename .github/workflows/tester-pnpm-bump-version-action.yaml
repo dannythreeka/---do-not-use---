@@ -3,7 +3,9 @@ name: tester-pnpm-bump-version-action
 env:
   CI: true
 on:
-  pull_request:
+  push:
+    branches:
+        - master
     paths:
       - "web-ar/**"
 
@@ -24,11 +26,11 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - name: BUMP VERSIONS
         run: |
-          git pull origin dev --no-rebase
+          git pull origin master
           git config user.email "actions@github.com"
           git config user.name "Github Acitons"
           npm run bump-patch
-          git push origin dev --no-rebase
+          git push origin master
       - name: CHECK IF PUBLISH IS AVAILABLE
         run: |
           npx can-npm-publish
