@@ -24,12 +24,11 @@ jobs:
           registry-url: "https://npm.pkg.github.com"
       - name: BUMP VERSIONS
         run: |
-          git config pull.rebase false
-          git pull origin tester/unable-bump-version-for-frontend-client
+          git pull origin dev
           git config user.email "actions@github.com"
           git config user.name "Github Acitons"
-          bump-patch
-          git push origin tester/unable-bump-version-for-frontend-client
+          npm run bump-patch
+          git push origin dev
       - name: CHECK IF PUBLISH IS AVAILABLE
         run: |
           npx can-npm-publish
