@@ -1,0 +1,36 @@
+# PRでスキーマ変更されたらjoinsure-console用のコードを自動生成する
+name: tester-pnpm-bump-version-action
+env:
+  CI: true
+on:
+  push:
+    branches:
+        - master
+    paths:
+      - "web-ar/**"
+
+defaults:
+  run:
+    working-directory: ./web-ar
+jobs:
+  tester-pnpm-bump-version-action:
+    name: tester-pnpm-bump-version-action
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: CHECKOUT
+        uses: actions/checkout@v3
+      - name: SETUP NODE
+        uses: actions/setup-node@v3
+        with:
+          registry-url: "https://npm.pkg.github.com"
+      - name: BUMP VERSIONS
+        run: |
+          git pull origin master
+          git config user.email "actions@github.com"
+          git config user.name "Github Acitons"
+          npm run bump-patch
+          git push origin master
+      - name: CHECK IF PUBLISH IS AVAILABLE
+        run: |
+          npx can-npm-publish
