@@ -1,0 +1,35 @@
+# PRでスキーマ変更されたらjoinsure-console用のコードを自動生成する
+name: tester-pnpm-bump-version-action
+env:
+  CI: true
+on:
+  pull_request:
+    paths:
+      - "web-ar/**"
+
+defaults:
+  run:
+    working-directory: ./web-ar
+jobs:
+  tester-pnpm-bump-version-action:
+    name: tester-pnpm-bump-version-action
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: CHECKOUT
+        uses: actions/checkout@v3
+      - name: SETUP NODE
+        uses: actions/setup-node@v3
+        with:
+          registry-url: "https://npm.pkg.github.com"
+      - name: BUMP VERSIONS
+        run: |
+          git config pull.rebase false
+          git pull origin tester/unable-bump-version-for-frontend-client
+          git config user.email "actions@github.com"
+          git config user.name "Github Acitons"
+          bump-patch
+          git push origin tester/unable-bump-version-for-frontend-client
+      - name: CHECK IF PUBLISH IS AVAILABLE
+        run: |
+          npx can-npm-publish
